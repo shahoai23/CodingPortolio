@@ -1,0 +1,36 @@
+# -------------------------
+# Editor settings (safe for all projects)
+# -------------------------
+.vscode/
+.idea/
+
+# -------------------------
+# Python virtual environments (safe for all Python projects)
+# -------------------------
+venv/
+.env/
+
+# -------------------------
+# Python bytecode (safe for all Python projects)
+# -------------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# -------------------------
+# Test & coverage caches (safe for all Python projects)
+# -------------------------
+.pytest_cache/
+.coverage
+htmlcov/
+
+# -------------------------
+# Node / JS projects (future-proofing)
+# -------------------------
+node_modules/
+
+# -------------------------
+# Git metadata (never commit these)
+# -------------------------
+.git/

@@ -75,3 +75,7 @@ def compute_kofn(req: KofNSystemRequest):
     logger.info("Computing k-of-n system reliability")
     result = kofn_system_reliability(req.component_reliabilities, req.min_required)
     return KofNSystemResponse(reliability=result)
+
+@app.get("/health") 
+def health(): 
+    return {"status": "ok"}
