@@ -1,0 +1,28 @@
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.env/
+
+# Test cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Editor and OS junk
+.vscode/
+.idea/
+.DS_Store
+
+# Docs and tests (not needed in image)
+docs/
+tests/

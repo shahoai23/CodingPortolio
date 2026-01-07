@@ -1,7 +1,7 @@
 
 ---
 
-# 📄 `class-diagram.md`  
+# class-diagram.md
 **Purpose:** Show internal structure — classes, functions, relationships.
 
 ```markdown

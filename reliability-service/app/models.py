@@ -15,7 +15,7 @@ ReliabilityList = Annotated[list[ReliabilityValue], Field(min_length=1)]
 class ExponentialReliabilityRequest(BaseModel):
     failure_rate: float = Field(
         ge=0,
-        description="Failure rate λ (must be > 0)"
+        description="Failure rate λ (must be ≥ 0)"
     )
     mission_time: float = Field(
         ge=0,
