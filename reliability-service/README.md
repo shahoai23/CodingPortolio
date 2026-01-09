@@ -53,7 +53,6 @@ http://localhost:8000/docs
 
 ## Future Work
 --Availability Calculcations
---Dissimilar k of n calculcations
 --deployment to cloud
 --cloud monitoring
 -SLOs, SLIs, and error budget tracking
