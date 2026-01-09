@@ -191,16 +191,22 @@ class TestKofNSystemReliability:
         with pytest.raises(ValueError):
             kofn_system_reliability(component_reliabilities, min_required)
     
-    @pytest.mark.xfail(reason="Dissimilar redundancy not yet implemented")
+    
     def test_kofn_system_reliability_dissimilar_items(self):
-        component_reliabilities = [0.9, 0.8, 0.7, 0.6]
+        component_reliabilities = [0.9, 0.8, 0.7]
         min_required = 2
+        #manuallya calculate probability of at least 2 working
+        three_good = 0.9 * 0.8 * 0.7 #all working
+        two_good = (0.9 * 0.8 * (1 - 0.7) + # first two working
+                    0.9 * (1 - 0.8) * 0.7 + # first and last working
+                    (1 - 0.9) * 0.8 * 0.7) # last two working
+        expected = three_good + two_good
 
         # Placeholder expected value — replace when implemented
         result = kofn_system_reliability(component_reliabilities, min_required)
 
         # This assertion is intentionally wrong for now
-        assert result == 0.0
+        assert round(result, 6) == round(expected, 6)
 
 
 class TestValidateReliabilityList:

@@ -1,4 +1,4 @@
-from math import exp
+from math import exp, comb
 from typing import Literal
 
 def exponential_reliability(failure_rate: float, time: float) -> float:
@@ -40,7 +40,7 @@ def mtbf_failure_rate_convert(value: float) -> float:
     1. MTBF and failure rate are reciprocals of each other (exponential distribution assumption).
     2. Value must be positive.
     """
-    if value < 0:
+    if value <= 0:
         raise ValueError("Value must be positive.")
     
     return 1.0 / value
@@ -92,19 +92,30 @@ def kofn_system_reliability(component_reliabilities: list[float], min_required: 
     if min_required < 1 or min_required > len(component_reliabilities):
         raise ValueError("min_required must be between 1 and the number of components.")
     
+    n = len(component_reliabilities)
+    k = min_required
+    
     if len(set(component_reliabilities)) == 1:
         # All reliabilities are the same, use simplified formula
         r = component_reliabilities[0]
-        n = len(component_reliabilities)
-        k = min_required
         system_reliability = 0
 
-        from math import comb
         system_reliability = sum(comb(n, i) * (r ** i) * ((1 - r) ** (n - i)) for i in range(k, n + 1))
         
-        return system_reliability
-    else: #TODO: Implement general case for dissimilar redundancy
-        raise NotImplementedError("Parallel system reliability for dissimilar component reliabilities is not yet implemented.")
+        
+    else: 
+        # General case for dissimilar reliabilities
+
+        r_vector = [0] * (n + 1)
+        r_vector[0] = 1.0 # Reliability with 0 working components
+
+        for reliability in component_reliabilities:
+            for j in range(n, 0, -1):
+                r_vector[j] = r_vector[j] * (1 - reliability) + r_vector[j - 1] * reliability
+            r_vector[0] *= (1 - reliability)
+        system_reliability = sum(r_vector[i] for i in range(k, n + 1))
+
+    return system_reliability
 
 def validate_reliability_list(reliabilities: list[float]) -> None:
     """
