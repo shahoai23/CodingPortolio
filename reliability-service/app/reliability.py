@@ -1,5 +1,4 @@
 from math import exp, comb
-from typing import Literal
 
 def exponential_reliability(failure_rate: float, time: float) -> float:
     """
